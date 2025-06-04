@@ -43,22 +43,22 @@ def linearRegression(X: np.array, Y: np.array, lr: float, lambda_: float, epochs
         weights -= lr * (gradient + l1_gradient)
 
     # Plotting cost vs epoch graph
-    plt.figure(figsize=(8, 5))
-    plt.plot(range(epochs), cost_history, label='Cost')
-    plt.xlabel("Epoch")
-    plt.ylabel("Cost")
-    plt.title("Cost vs Epoch")
-    plt.grid(True)
-    plt.legend()
-    plt.tight_layout()
-    plt.show()
+    # plt.figure(figsize=(8, 5))
+    # plt.plot(range(epochs), cost_history, label='Cost')
+    # plt.xlabel("Epoch")
+    # plt.ylabel("Cost")
+    # plt.title("Cost vs Epoch")
+    # plt.grid(True)
+    # plt.legend()
+    # plt.tight_layout()
+    # plt.show()
     return weights
 
 # Dummy data to check function, should print [1,2] as weights for y=2x+1 equation
-X = np.array([[2], [4]])
-Y = np.array([5, 9])
-lr = 0.1
-lambda_ = 0
-epochs = 1000
-weights = linearRegression(X, Y, lr, lambda_, epochs)
-print(weights)
+# X = np.array([[2], [4]])
+# Y = np.array([5, 9])
+# lr = 0.1
+# lambda_ = 0
+# epochs = 1000
+# weights = linearRegression(X, Y, lr, lambda_, epochs)
+# print(weights)
