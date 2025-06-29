@@ -1,7 +1,9 @@
 from flask import Flask, request, jsonify
 from tweetgenerator import AdvancedTweetGenerator
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 generator = AdvancedTweetGenerator()
 
 @app.route('/generate', methods=['POST'])
@@ -46,15 +48,14 @@ $ curl -X POST http://localhost:5001/generate \
   -H "Content-Type: application/json" \
   -d '{
     "company": "Tesla",
-    "industry": "tech",
-    "brand_voice": "professional",
+    "industry": "Tech",
+    "brand_voice": "Professional",
     "message": "Revolutionizing electric vehicle performance with cutting-edge battery technology",
-    "word_count_target": 20,
     "sentiment_target": 0.6,
     "has_media": false
   }'
 {
-  "generated_tweet": "We're thrilled to announce: Revolutionizing electric vehicle performance with cutting-edge battery technology \u2013 Thanks, Tesla! \ud83d\ude4c.",
+  "generated_tweet": "Can\u2019t wait to see this in action: Revolutionizing electric vehicle performance with cutting-edge battery technology \ud83d\ude80 #AI Stay tuned!",
   "success": true
 }
 """
