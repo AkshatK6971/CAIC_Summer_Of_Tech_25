@@ -1,9 +1,14 @@
 import React, { useState } from "react";
 import axios from "axios";
 
+const API_BASE = "https://tweet-intelligence-engine-backend.onrender.com";
+
 function App() {
   const [generatedTweet, setGeneratedTweet] = useState("");
+  const [generationInfo, setGenerationInfo] = useState({});
   const [predictedLikes, setPredictedLikes] = useState(null);
+  const [popularityEstimate, setPopularityEstimate] = useState("");
+  const [predictionDetails, setPredictionDetails] = useState({});
 
   const [genForm, setGenForm] = useState({
     company: "",
@@ -48,15 +53,17 @@ function App() {
     setLoadingGen(true);
     setErrorGen("");
     setGeneratedTweet("");
+    setGenerationInfo({});
     try {
       const payload = {
         ...genForm,
         sentiment_target: genForm.sentiment_target / 10
       };
-      const res = await axios.post("http://localhost:5001/generate", payload);
+      const res = await axios.post(`${API_BASE}/generate`, payload);
       setGeneratedTweet(res.data.generated_tweet);
+      setGenerationInfo(res.data.info || {});
     } catch (err) {
-      setErrorGen("Failed to generate tweet.");
+      setErrorGen("❌ Failed to generate tweet.");
     } finally {
       setLoadingGen(false);
     }
@@ -66,11 +73,15 @@ function App() {
     setLoadingPred(true);
     setErrorPred("");
     setPredictedLikes(null);
+    setPopularityEstimate("");
+    setPredictionDetails({});
     try {
-      const res = await axios.post("http://localhost:5000/predict", predForm);
+      const res = await axios.post(`${API_BASE}/predict`, predForm);
       setPredictedLikes(res.data.predicted_likes);
+      setPopularityEstimate(res.data.popularity_estimate || "");
+      setPredictionDetails(res.data.details || {});
     } catch (err) {
-      setErrorPred("Failed to predict likes.");
+      setErrorPred("❌ Failed to predict likes.");
     } finally {
       setLoadingPred(false);
     }
@@ -79,12 +90,13 @@ function App() {
   return (
     <div className="min-h-screen bg-gray-100 p-8 font-sans">
       <h1 className="text-3xl font-bold text-center text-gray-800 mb-10">
-        Tweet Generator & Like Predictor
+        🚀 Tweet Generator & Like Predictor 📊
       </h1>
 
       <div className="grid md:grid-cols-2 gap-10 max-w-6xl mx-auto">
+        
         {/* Tweet Generator */}
-        <div className="bg-white p-6 rounded shadow">
+        <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-200">
           <h2 className="text-xl font-semibold mb-4 text-gray-700">Generate Tweet</h2>
           <div className="space-y-4">
             <Input label="Company" name="company" value={genForm.company} onChange={handleGenChange} />
@@ -94,23 +106,39 @@ function App() {
             <Select label="Industry" name="industry" value={genForm.industry} onChange={handleGenChange} options={["Tech", "Food", "Fashion", "General"]} />
             <Textarea label="Message" name="message" value={genForm.message} onChange={handleGenChange} />
             <button
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded"
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg transition"
               onClick={generateTweet}
               disabled={loadingGen}
             >
               {loadingGen ? "Generating..." : "Generate Tweet"}
             </button>
-            {errorGen && <p className="text-red-500">{errorGen}</p>}
+
+            {errorGen && <p className="text-red-500 font-semibold">{errorGen}</p>}
+
             {generatedTweet && (
-              <div className="p-4 bg-green-100 text-green-800 rounded">
-                <strong>Generated Tweet:</strong> {generatedTweet}
+              <div className="p-5 bg-green-50 text-green-900 rounded-xl shadow-md border border-green-200 space-y-3">
+                <p className="text-lg font-bold">🎉 Generated Tweet:</p>
+                <p className="text-base">{generatedTweet}</p>
+
+                {Object.keys(generationInfo).length > 0 && (
+                  <div className="text-sm text-green-700">
+                    <p className="font-semibold">Info:</p>
+                    <div className="pl-3 border-l-4 border-green-300 space-y-1 font-mono text-green-800">
+                      {Object.entries(generationInfo).map(([key, value]) => (
+                        <div key={key}>
+                          <span className="font-bold">{key}:</span> {value}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
             )}
           </div>
         </div>
 
         {/* Likes Predictor */}
-        <div className="bg-white p-6 rounded shadow">
+        <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-200">
           <h2 className="text-xl font-semibold mb-4 text-gray-700">Predict Likes</h2>
           <div className="space-y-4">
             <Select label="Day" name="day" value={predForm.day} onChange={handlePredChange} options={["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]} />
@@ -120,20 +148,39 @@ function App() {
             <Checkbox label="Has Media" name="has_media" checked={predForm.has_media} onChange={handlePredChange} />
             <Textarea label="Content" name="content" value={predForm.content} onChange={handlePredChange} />
             <button
-              className="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-2 rounded"
+              className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 rounded-lg transition"
               onClick={predictLikes}
               disabled={loadingPred}
             >
               {loadingPred ? "Predicting..." : "Predict Likes"}
             </button>
-            {errorPred && <p className="text-red-500">{errorPred}</p>}
+
+            {errorPred && <p className="text-red-500 font-semibold">{errorPred}</p>}
+
             {predictedLikes !== null && (
-              <div className="p-4 bg-yellow-100 text-yellow-800 rounded">
-                <strong>Predicted Likes:</strong> {predictedLikes}
+              <div className="p-5 bg-yellow-50 text-yellow-900 rounded-xl shadow-md border border-yellow-200 space-y-3">
+                <p className="text-lg font-bold">📊 Predicted Likes: {predictedLikes}</p>
+                {popularityEstimate && (
+                  <p className="text-xl font-semibold">{popularityEstimate}</p>
+                )}
+
+                {Object.keys(predictionDetails).length > 0 && (
+                  <div className="text-sm text-yellow-700">
+                    <p className="font-semibold">Details:</p>
+                    <div className="pl-3 border-l-4 border-yellow-300 space-y-1 font-mono text-yellow-800">
+                      {Object.entries(predictionDetails).map(([key, value]) => (
+                        <div key={key}>
+                          <span className="font-bold">{key}:</span> {String(value)}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
             )}
           </div>
         </div>
+
       </div>
     </div>
   );
