@@ -10,7 +10,7 @@ In this project, you will investigate light pollution by analyzing real-world da
 
 This project offers an excellent opportunity to apply and enhance your research papers analysis, data science, programming, and scientific communication skills. You will work with real-world datasets, employ powerful analytical tools, and contribute to a better understanding of this crucial environmental issue.
 
-To better understand the significance of this environmental hazard, explore this  [Light Pollution Map by National Geographic Map Maker](https://www.arcgis.com/apps/mapviewer/index.html?webmap=b296947d717643e5805378a5c3f5e6eb)(Reload if it isn't opening), which illustrates its widespread effects on the world.
+To better understand the significance of this environmental hazard, explore this  [Light Pollution Map by National Geographic Map Maker](https://www.arcgis.com/apps/instant/atlas/index.html?appid=0cd1cdee853c413a84bfe4b9a6931f0d&webmap=b296947d717643e5805378a5c3f5e6eb)(Reload if it isn't opening), which illustrates its widespread effects on the world.
 
 ## What You'll Do in This Project
 
@@ -73,8 +73,8 @@ Feel free to include any images, datasets, and other file types and mention appr
 **List of Resources:**
 
 - [Light Pollution - Wikipedia](https://en.wikipedia.org/wiki/Light_pollution)
-- [Studying light pollution as an emerging environmental concern in India](https://www.google.com/search?q=https://www.tandfonline.com/doi/full/10.1080/23311932.2021.1921197)
-- [Artificial Light at Night: State of the Science 2024](https://www.google.com/search?q=https://www.darksky.org/resources/what-is-light-pollution/state-of-the-science/)
+- [Studying light pollution as an emerging environmental concern in India](https://www.econstor.eu/bitstream/10419/271475/1/1818042010.pdf)
+- [Artificial Light at Night: State of the Science 2024](https://darksky.org/resources/what-is-light-pollution/)
 
 ### Task 1.2: Overview of Spaceborne Sensors Data
 
@@ -87,8 +87,8 @@ Read the below-mentioned articles and provide a detailed description of the data
 
 **List of Resources:**
 
-- [Introduction to nighttime light data](https://www.google.com/search?q=https://ghsl.jrc.ec.europa.eu/nighttimeLights.php)
-- [How to measure light pollution - A systematic review of methods and applications](https://www.google.com/search?q=https://www.sciencedirect.com/science/article/pii/S003442572100298X)
+- [Introduction to nighttime light data](https://worldbank.github.io/OpenNightLights/tutorials/mod1_2_introduction_to_nighttime_light_data.html)
+- [How to measure light pollution - A systematic review of methods and applications](https://www.sciencedirect.com/science/article/pii/S2210670723000768)
 
 ### Task 1.3: Finding Ways to Reduce Light Pollution
 
@@ -96,8 +96,8 @@ Now that you've learned more about light pollution, let's find ways to reduce it
 
 **List of Resources:**
 
-- [Causes of Light Pollution](https://www.google.com/search?q=https://www.darksky.org/light-pollution/what-is-light-pollution/causes-of-light-pollution/)
-- [How to Tackle Light Pollution](https://www.google.com/search?q=https://www.darksky.org/light-pollution/how-to-tackle-light-pollution/)
+- [Causes of Light Pollution](https://darksky.org/resources/what-is-light-pollution/causes/)
+- [How to Tackle Light Pollution](https://darksky.org/resources/what-is-light-pollution/light-pollution-solutions/)
 - [Light Pollution - Wikipedia](https://en.wikipedia.org/wiki/Light_pollution)
 
 ## 2. Project Tracks and Technologies
